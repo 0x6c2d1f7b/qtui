@@ -9,8 +9,8 @@ Page {
     property alias msgHistory: msgHistory
 
     id: pageTwo
-    width: 240
-    height: 1440
+    width: 1440 // 480
+    height: 720 // 240
     background: Rectangle {
         color: "#000000"
     }

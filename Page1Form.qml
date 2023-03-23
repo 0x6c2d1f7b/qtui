@@ -5,8 +5,6 @@ import QtQuick.Layouts 1.3 // cell
 
 Page {
     id: page
-    width: 720
-    height: 1440
     property string p_commandButtonColor: eClass.mainColor
 
     Component.onCompleted: {
@@ -14,6 +12,15 @@ Page {
 
     background: Rectangle {
         color: "#000000"
+    }
+
+    // Hide this after aligment
+    Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+        border.color: "red"
+        border.width: 0
+        radius: 0
     }
 
     header: Label {
@@ -27,17 +34,18 @@ Page {
         color: "#ffff00"
     }
 
-
+    // Insignia Frame
     Frame {
         id: callStatus
         anchors.topMargin: 0
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.right: parent.right
-        height: 230 // 250
+        // anchors.bottom: parent.bottom
+        height: 180
+        width: parent.width/2
         background: Rectangle {
             color: "transparent"
-            border.color: "#ffffff"
+            border.color: "blue"
             border.width: 0
             radius: 2
         }
@@ -56,8 +64,6 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        // eClass.debugThis('')
-                        // console.log("clicked")
                     }
                 }
             }
@@ -87,11 +93,11 @@ Page {
         anchors.topMargin: 0
         anchors.top: callStatus.bottom
         anchors.left: parent.left
-        anchors.right: parent.right
+        width: parent.width/2
         height: 30
         background: Rectangle {
             color: "transparent"
-            border.color: "#ffffff"
+            border.color: "yellow"
             border.width: 0
             radius: 2
         }
@@ -102,29 +108,9 @@ Page {
             padding: 0
             color: eClass.mainColor
         }
-        // TODO: Remove this
-        Image {
-            id: powerButtonImage
-            source: "powerbutton.png"
-            width: 15
-            height: 15
-            anchors.top: parent.top
-            anchors.right: parent.right
-            visible: false
-            MouseArea {
-                id: area
-                hoverEnabled: true
-                width: 15
-                height: 15
-                anchors.fill: parent
-                acceptedButtons: Qt.AllButtons
-                onClicked: {
-                    eClass.powerOff()
-                }
-            }
-        }
     }
-    //
+
+    // Cell information (TODO)
     Frame {
         id: cellStatus
         visible: eClass.cellDisplayEnabled
@@ -209,8 +195,9 @@ Page {
     /* Contacts: 10 peer */
     Frame {
         id: contactButtonFrame
-        anchors.top: statusTextFrame.bottom
-        anchors.left: parent.left
+        anchors.top: parent.top // statusTextFrame.bottom
+        // anchors.left: parent.left
+        width: parent.width/2
         anchors.right: parent.right
         anchors.bottom: parent.bottom
 
