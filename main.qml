@@ -272,21 +272,21 @@ ApplicationWindow {
         Frame {
             id: lockScreenFrame
             anchors.fill: parent
-            // enabled: true
-            visible: false // eClass.lockScreen_active
+            visible: eClass.lockScreen_active
             anchors.topMargin: -15
             anchors.rightMargin: -15
             anchors.leftMargin: -15
             anchors.bottomMargin: -20
             background: Rectangle {
-                color: "transparent"
-                border.color: "#ffffff"
-                border.width: 0
+                color: "black"
+                border.color: "red"
+                border.width: 2
             }
             Image {
                 id: lockScreenImage
                 anchors.centerIn: parent
                 anchors.fill: parent
+                visible: false
                 source: "lockscreen.png"
             }
 
@@ -309,6 +309,42 @@ ApplicationWindow {
                 }
             }
 
+            // Pin code for vertical UI
+            TextField {
+                id: pinCodeEntryVertical
+                anchors.centerIn: parent
+                height: 30
+                width: 80
+                padding: 1
+                font.pointSize: 12
+                color: eClass.mainColor
+                placeholderTextColor: eClass.dimColor
+                placeholderText: ""
+                focus: true
+                horizontalAlignment: TextInput.AlignHCenter
+                echoMode: TextField.Password
+                passwordCharacter: "•"
+                onAccepted: {
+                    eClass.checkVerticalPinCode(pinCodeEntryVertical.text);
+                    pinCodeEntryVertical.text="";
+                }
+                /* Limit to 10 */
+                onTextChanged: {
+                    eClass.registerTouch()
+                    if (length > 10)
+                        remove(10, length)
+                }
+                background: Rectangle {
+                    radius: 2
+                    color: "#000000"
+                    anchors.fill: parent
+                    height: 30
+                    border.color: eClass.mainColor
+                    border.width: 2
+                }
+            }
+
+            // PIN code (portrait)
             Rectangle {
                 id: pinEntry
                 x: 40

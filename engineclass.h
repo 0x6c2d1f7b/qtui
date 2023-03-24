@@ -351,7 +351,8 @@ public:
     bool getLayer2Wifi();
     Q_INVOKABLE void setLayer2Wifi(bool newLayer2Value);
     Q_INVOKABLE bool getMacsecValid();
-
+    // Vertical pin page
+    Q_INVOKABLE void checkVerticalPinCode(QString code);
 
 private:
     QString m_peer_0_CallSign="";

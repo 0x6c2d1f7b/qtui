@@ -51,6 +51,7 @@
 #include <QSettings>
 #include <QQmlEngine>
 #include <QQmlComponent>
+#include <QChar>
 #include <fcntl.h>
 #include <unistd.h>
 #include <linux/input.h>
@@ -2309,12 +2310,46 @@ void engineClass::onVaultProcessFinished()
     }
 }
 
+void engineClass::checkVerticalPinCode(QString code)
+{
+    if ( m_vaultModeActive == true ) {
+        /* VAULT mode */
+        QString vaultPinCode = code;
+        if ( vaultPinCode.length() > 3 ) {
+            vaultOpenProcess.connect(&vaultOpenProcess,
+                                     &QProcess::readyReadStandardOutput,
+                                     this, &engineClass::onVaultProcessReadyReadStdOutput);
+            vaultOpenProcess.connect(&vaultOpenProcess,
+                                     (void (QProcess::*)(int,QProcess::ExitStatus))&QProcess::finished,
+                                     this, &engineClass::onVaultProcessFinished);
+
+            m_vaultNotifyText = "CHECKING";
+            m_vaultNotifyColor = "yellow";
+            m_vaultNotifyTextColor = "red";
+            emit vaultScreenNotifyTextChanged();
+            emit vaultScreenNotifyColorChanged();
+            emit vaultScreenNotifyTextColorChanged();
+            vaultOpenProcess.setProgram("/bin/vault-pin.sh");
+            vaultOpenProcess.setArguments({vaultPinCode});
+            vaultOpenProcess.start();
+        } else {
+            m_lockScreenPinCode="";
+            emit lockScreenPinCodeChanged();
+        }
+    } else {
+        /* NORMAL mode */
+        if ( code.compare( uPref.m_pinCode ) == 0 ) {
+            m_lockScreen_active=false;
+            emit lockScreen_activeChanged();
+        }
+    }
+}
 
 int engineClass::lockNumberEntry(int pinCodeNumber)
 {
     /* 99 is 'enter' */
     if ( pinCodeNumber == 99 ) {
-
+        qDebug() << "Got 99";
 
         if ( m_vaultModeActive == true ) {
             /* VAULT mode */
@@ -2960,6 +2995,8 @@ bool engineClass::getMacsecValid()
 {
     return mMacsecKeyValid;
 }
+
+
 
 // Load APN from file and default to 'internet' if no file is present
 void engineClass::loadApnName()
