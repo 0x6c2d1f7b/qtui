@@ -982,12 +982,13 @@ Page {
         } // ** item
     } // ** flickable
 
+    /* Rotated popup content */
     Popup {
         id: popup
         anchors.centerIn: parent
         width: 220
-        height: 350
-        modal: true
+        height: 400
+         modal: true
         focus: true
         clip: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
@@ -997,66 +998,65 @@ Page {
             radius: 2
         }
 
-        Text {
-            id: popupTitleText
-            font.pointSize: 12
-            text: "About"
-            color: eClass.mainColor
-        }
         ScrollView {
             id: view
             clip: true
             contentWidth: -1
-            anchors.fill: parent
-            anchors.top: popupTitleText.bottom
-            anchors.topMargin: 25
-            anchors.bottomMargin: 30
+            anchors.centerIn: parent
+            anchors.leftMargin: -20
+            width: 250
+            height: 200
+            rotation: 90
+            transformOrigin: Item.Center
+
             Text {
                 textFormat: Text.RichText
-                width: 200
+                width: parent.width
                 wrapMode: Text.WordWrap
                 color: eClass.mainColor
                 text: eClass.aboutTextContent
                 font.pointSize: 7
             }
         }
-        // Close button
-        Button {
-            id: popupCloseButton
-
-            anchors{
-                bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
+            // Close button
+            Button {
+                id: popupCloseButton
+                rotation: 90
+                transformOrigin: Item.Center
+                anchors{
+                    bottom: parent.bottom
+                    left: parent.left
+                    bottomMargin: 15
+                }
+                width: 50
+                height: 20
+                text: "Close"
+                font.pointSize: 8
+                checkable: false
+                onClicked: {
+                    popup.close()
+                    eClass.registerTouch()
+                }
+                contentItem: Text {
+                    text: parent.text
+                    font: parent.font
+                    opacity: enabled ? 1.0 : 0.3
+                    color: eClass.mainColor
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    elide: Text.ElideRight
+                }
+                background: Rectangle {
+                    anchors.fill: parent
+                    color: parent.down ? eClass.dimColor : "transparent"
+                    opacity: enabled ? 1 : 0.3
+                    border.color: eClass.mainColor
+                    radius: 2
+                }
             }
-            width: 50
-            height: 20
-            text: "Close"
-            font.pointSize: 8
-            checkable: false
-            onClicked: {
-                popup.close()
-                eClass.registerTouch()
-            }
-            contentItem: Text {
-                text: parent.text
-                font: parent.font
-                opacity: enabled ? 1.0 : 0.3
-                color: eClass.mainColor
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                elide: Text.ElideRight
-            }
-            background: Rectangle {
-                anchors.fill: parent
-                color: parent.down ? eClass.dimColor : "transparent"
-                opacity: enabled ? 1 : 0.3
-                border.color: eClass.mainColor
-                radius: 2
-            }
-        }
         enter: Transition {
             NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
         }
-    } // ** popup
+    }
 
 }

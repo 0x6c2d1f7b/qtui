@@ -2322,7 +2322,6 @@ void engineClass::checkVerticalPinCode(QString code)
             vaultOpenProcess.connect(&vaultOpenProcess,
                                      (void (QProcess::*)(int,QProcess::ExitStatus))&QProcess::finished,
                                      this, &engineClass::onVaultProcessFinished);
-
             m_vaultNotifyText = "CHECKING";
             m_vaultNotifyColor = "yellow";
             m_vaultNotifyTextColor = "red";
