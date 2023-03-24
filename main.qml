@@ -34,6 +34,8 @@ ApplicationWindow {
         color: "#000000"
     }
 
+    property alias pageSwipeIndex: swipeView
+
     Item {
         id: pageItem
         width: 480
@@ -61,7 +63,7 @@ ApplicationWindow {
             console.log("Window size: ", window.width, " ", window.height)
         }
 
-        property alias pageSwipeIndex: swipeView
+
 
         Rectangle {
             color: "transparent"
@@ -230,21 +232,17 @@ ApplicationWindow {
                 id: pageOne
             }
 
-//            Page2Form {
-//                id: pageTwo
-//            }
+            Page2Form {
+                id: pageTwo
+            }
 
-//            Page3Form {
-//                id: pageThree
-//            }
-//            onCurrentIndexChanged: {
-//                eClass.registerTouch()
-//                eClass.setSwipeIndex(swipeView.currentIndex)
-//            }
-//            Component.onCompleted: {
-
-//            }
-
+            Page3Form {
+                id: pageThree
+            }
+            onCurrentIndexChanged: {
+                eClass.registerTouch()
+                eClass.setSwipeIndex(swipeView.currentIndex)
+            }
         }
 
         // Camo screen
@@ -583,35 +581,35 @@ ApplicationWindow {
         }
 
         // Input panel
-        InputPanel {
-            id: inputPanel
-            z: 99
-            x: 0
-            y: window.height
-            width: window.width
-            Component.onCompleted: {
-            }
-            states: State {
-                name: "visible"
-                when: (swipeView.currentIndex == "1" || inputPanel.active )
-                PropertyChanges {
-                    target: inputPanel
-                    y: window.height - inputPanel.height
-                }
-            }
-            transitions: Transition {
-                from: ""
-                to: "visible"
-                reversible: true
-                ParallelAnimation {
-                    NumberAnimation {
-                        properties: "y"
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
-        }
+//        InputPanel {
+//            id: inputPanel
+//            z: 99
+//            x: 0
+//            y: window.height
+//            width: window.width
+//            Component.onCompleted: {
+//            }
+//            states: State {
+//                name: "visible"
+//                when: (swipeView.currentIndex == "1" || inputPanel.active )
+//                PropertyChanges {
+//                    target: inputPanel
+//                    y: window.height - inputPanel.height
+//                }
+//            }
+//            transitions: Transition {
+//                from: ""
+//                to: "visible"
+//                reversible: true
+//                ParallelAnimation {
+//                    NumberAnimation {
+//                        properties: "y"
+//                        duration: 250
+//                        easing.type: Easing.InOutQuad
+//                    }
+//                }
+//            }
+//        }
 
     }
 

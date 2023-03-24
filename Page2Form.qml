@@ -9,8 +9,6 @@ Page {
     property alias msgHistory: msgHistory
 
     id: pageTwo
-    width: 1440 // 480
-    height: 720 // 240
     background: Rectangle {
         color: "#000000"
     }
@@ -67,8 +65,8 @@ Page {
         y: 10
         radius: 0
         color: "#000000"
-        width: 240
-        height: 280
+        width: parent.width
+        height: 170
         border.color: eClass.mainColor
         border.width: 1
 

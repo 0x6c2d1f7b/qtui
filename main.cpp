@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[])
 {
-    qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
+    // qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
     qputenv("QT_VIRTUALKEYBOARD_STYLE", "pineroot");
     qputenv("QT_QPA_FONTDIR", "/usr/share/fonts/");
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

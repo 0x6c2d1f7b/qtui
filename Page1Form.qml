@@ -1012,10 +1012,15 @@ Page {
     Frame {
         id: powerOffDialog
         visible: eClass.powerOffDialogVisible
-        x: 5
-        y: 265
-        width: 230
-        height: 200
+//        x: 5
+//        y: 100
+//        width: 230
+//        height: 150
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        width: parent.width/2
+
         background: Rectangle {
             anchors.fill: parent
             border.width: 2
@@ -1027,7 +1032,8 @@ Page {
         Button {
             id: powerOffButtonOnDialog
             x: 0
-            y: 85
+            // y: 85
+            anchors.bottom: parent.bottom
             width: (parent.width / 2) - 5
             height: 30
             text: qsTr("Shutdown")
@@ -1056,7 +1062,8 @@ Page {
         Button {
             id: cancelPowerOff
             x: (parent.width / 2) + 5
-            y: 85
+            // y: 85
+            anchors.bottom: parent.bottom
             width: (parent.width / 2) - 5
             height: 30
             text: qsTr("Cancel")
@@ -1097,10 +1104,12 @@ Page {
     Frame {
         id: incomingCallDialog
         visible: eClass.callDialogVisible
-        x: 5
-        y: 265
-        width: 230
-        height: 170
+
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        width: parent.width/2
+
         background: Rectangle {
             anchors.fill: parent
             border.width: 2
