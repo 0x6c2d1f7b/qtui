@@ -25,7 +25,6 @@
 #include <QSocketNotifier>
 #include <QProcess>
 #include <QQmlPropertyMap>
-
 #define PEER_COUNT  10
 #define NODECOUNT   10
 #define CONNPOINTCOUNT 3
@@ -33,7 +32,6 @@
 #define TELEMETRY_FIFO_OUT      "/tmp/telemetry_fifo_out"
 #define MESSAGE_RECEIVE_FIFO    "/tmp/message_fifo_out"
 #define DEVICE_LOCK_TIME        120
-
 
 class engineClass : public QObject
 {
@@ -174,7 +172,6 @@ class engineClass : public QObject
     Q_PROPERTY(bool macsecPttEnabled READ getMacsecPttEnabled WRITE setMacsecPttEnabled NOTIFY macsecPttEnabledChanged)
     Q_PROPERTY(QString macsecKeyed READ getMacsecKeyed NOTIFY macsecKeyedChanged)
     Q_PROPERTY(bool layer2Wifi READ getLayer2Wifi WRITE setLayer2Wifi NOTIFY layer2WifiChanged)
-
     Q_PROPERTY(bool macsecValid READ getMacsecValid NOTIFY macsecValidChanged)
 
 public:
@@ -291,7 +288,7 @@ public:
     Q_INVOKABLE QString getPeer_8_keyPercentage();
     Q_INVOKABLE QString getPeer_9_keyPercentage();
     Q_INVOKABLE QString getLockScreenPinCode();
-
+    /* wifi */
     Q_INVOKABLE void wifiScanButton();
     Q_INVOKABLE void wifiConnectButton(QString ssid, QString psk);
     Q_INVOKABLE QString getWifiStatusText();
@@ -299,9 +296,9 @@ public:
     Q_INVOKABLE void wifiEraseAllConnection();
     Q_INVOKABLE QString getWifiNotifyText();
     Q_INVOKABLE QString getWifiNotifyColor();
+    Q_INVOKABLE void getWifiStatus();
 
     Q_INVOKABLE QString getAboutTextContent();
-    Q_INVOKABLE void getWifiStatus();
     Q_INVOKABLE void registerTouch();
 
     bool deepSleepEnabled() const;
@@ -318,7 +315,6 @@ public:
     bool nightModeEnabled() const;
     void setNightModeEnabled(bool newNightModeEnabled);
     Q_INVOKABLE void changeNightModeEnabled(bool newNightModeEnabled);
-
     bool callSignOnVaultEnabled() const;
     Q_INVOKABLE void setCallSignOnVaultEnabled(bool newCallSignOnVaultEnabled);
 
@@ -541,8 +537,6 @@ private:
     QString mMacsecKeyed;
     bool mLayer2WifiEnabled;
     bool mMacsecKeyValid;
-
-
 
 public slots:
     void initEngine();

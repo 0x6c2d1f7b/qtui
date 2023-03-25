@@ -97,7 +97,7 @@ engineClass::engineClass(QObject *parent)
     emit dimColorChanged();
     mMessageColorLocal = "#FFFFFF";
     mMessageColorRemote = "#00FF00";
-
+    /* Startup timers */
     QTimer::singleShot(2 * 1000, this, SLOT(loadSettings()));
     QTimer::singleShot(4 * 1000, this, SLOT(initEngine()));
     /* environment and proximity evaluation timers */

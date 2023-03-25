@@ -221,12 +221,11 @@ ApplicationWindow {
             }
         }
 
-
         SwipeView {
             id: swipeView
             topPadding: 15
             anchors.fill: parent
-            currentIndex: eClass.swipeViewIndex // tabBar.currentIndex
+            currentIndex: eClass.swipeViewIndex
 
             Page1Form {
                 id: pageOne
@@ -268,7 +267,7 @@ ApplicationWindow {
             }
         }
 
-        // lock screen
+        // Lock screen
         Frame {
             id: lockScreenFrame
             anchors.fill: parent
@@ -277,6 +276,12 @@ ApplicationWindow {
             anchors.rightMargin: -15
             anchors.leftMargin: -15
             anchors.bottomMargin: -20
+            /* Test for PIN code entry focus */
+            onVisibleChanged: {
+                if(eClass.lockScreen_active) {
+                    pinCodeEntryVertical.forceActiveFocus();
+                }
+            }
             background: Rectangle {
                 color: "black"
                 border.color: "red"
@@ -616,7 +621,8 @@ ApplicationWindow {
             }
         }
 
-        // Input panel
+        // Input panel, disabled on hw kb version
+
 //        InputPanel {
 //            id: inputPanel
 //            z: 99
