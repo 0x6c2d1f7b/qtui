@@ -48,7 +48,6 @@ ApplicationWindow {
             origin.y: window.height / 2 ;
             angle: 90
         }
-
         // Hide this after aligment
         Rectangle {
             visible: false
@@ -58,12 +57,9 @@ ApplicationWindow {
             border.width: 2
             radius: 0
         }
-
         Component.onCompleted: {
-            console.log("Window size: ", window.width, " ", window.height)
+            pinCodeEntryVertical.forceActiveFocus()
         }
-
-
 
         Rectangle {
             color: "transparent"
@@ -80,9 +76,6 @@ ApplicationWindow {
                 font.pointSize: 7
                 color: eClass.mainColor
             }
-            Component.onCompleted: {
-            }
-
         }
         Rectangle {
             id: callSignLabel
@@ -340,12 +333,12 @@ ApplicationWindow {
                         remove(10, length)
                 }
                 background: Rectangle {
-                    radius: 2
+                    radius: 0
                     color: "#000000"
                     anchors.fill: parent
                     height: 30
                     border.color: eClass.mainColor
-                    border.width: 2
+                    border.width: 1
                 }
             }
 
