@@ -174,12 +174,15 @@ Page {
                     border.width: control.visualFocus ? 2 : 1
                     radius: 2
                 }
+                // Check this rotation still
                 popup: Popup {
                     y: control.height - 1
-                    width: control.width
-                    implicitHeight: 200
+                    width: 100
+                    implicitHeight: 100
                     padding: 1
                     contentItem: ListView {
+                        rotation: 90
+                        transformOrigin: Item.Center
                         clip: true
                         implicitHeight: contentHeight
                         model: control.popup.visible ? control.delegateModel : null
@@ -192,6 +195,7 @@ Page {
                         radius: 2
                     }
                 }
+
             }
 
             // Buttons
@@ -396,6 +400,7 @@ Page {
             // Checkbox (this was hard for me to understand)
             CheckBox {
                 id: deepSleepCheckbox
+                enabled: false
                 anchors.top: powerSaveTitle.bottom
                 anchors.topMargin: 5
                 anchors.left: parent.left
